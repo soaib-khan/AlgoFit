@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AlgoFit — minimal fashion, curated for everyday movement." />
+  <title>AlgoFit — Curated Fashion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+  <div class="grain"></div>
+  <header class="nav">
+    <a class="logo" href="#top">ALGO<span>FIT</span></a>
+    <nav>
+      <a href="#shop">Shop</a><a href="#story">Story</a><a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="searchBtn" aria-label="Search">⌕</button>
+      <button class="icon-btn" id="accountBtn" aria-label="Account">◯</button>
+      <button class="bag" id="bagBtn">Bag <b id="bagCount">0</b></button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy reveal">
+        <p class="eyebrow">CURATED FOR THE EVERYDAY</p>
+        <h1>Wear less.<br><em>Mean more.</em></h1>
+        <p class="hero-text">Clean silhouettes, essential layers and everyday pieces designed to move with you.</p>
+        <a class="primary" href="#shop">Explore collection <span>↗</span></a>
+      </div>
+      <div class="hero-art reveal">
+        <div class="orb"></div>
+        <div class="hero-card card-a"><span>01</span><strong>FORM</strong></div>
+        <div class="hero-card card-b"><span>02</span><strong>FUNCTION</strong></div>
+        <div class="hero-model">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1100&q=90"
+            alt="Indian style fashion editorial">
+        </div>
+        <div class="vertical-label">ALGOFIT / 2026</div>
+      </div>
+    </section>
+
+    <section class="ticker">
+      <div>NEW DROP&nbsp;&nbsp; / &nbsp;&nbsp;ESSENTIALS&nbsp;&nbsp; / &nbsp;&nbsp;CURATED FASHION&nbsp;&nbsp; /
+        &nbsp;&nbsp;NEW DROP&nbsp;&nbsp; / &nbsp;&nbsp;ESSENTIALS&nbsp;&nbsp; / &nbsp;&nbsp;</div>
+    </section>
+
+    <section class="shop section" id="shop">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">THE COLLECTION</p>
+          <h2>Built around<br><em>your rotation.</em></h2>
+        </div>
+        <div class="filters" id="filters"><button class="active" data-filter="All">All</button><button
+            data-filter="Hoodies">Hoodies</button><button data-filter="Jeans">Jeans</button><button
+            data-filter="T-Shirts">T-Shirts</button><button data-filter="Women">Women</button></div>
+      </div>
+      <div class="product-grid" id="products"></div>
+    </section>
+
+    <section class="manifesto section" id="story">
+      <div class="manifesto-image reveal"><img
+          src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1100&q=85"
+          alt="Indian style clothing details"></div>
+      <div class="manifesto-copy reveal">
+        <p class="eyebrow">THE ALGOFIT STANDARD</p>
+        <h2>Minimal outside.<br><em>Thoughtful inside.</em></h2>
+        <p>AlgoFit is built around a simple idea: good clothes do not need to shout. We focus on versatile pieces,
+          considered details and a visual language that stays clean.</p>
+        <div class="stats">
+          <div><b>01</b><span>Clean design</span></div>
+          <div><b>02</b><span>Easy styling</span></div>
+          <div><b>03</b><span>Everyday comfort</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter section" id="contact">
+      <p class="eyebrow">STAY IN THE LOOP</p>
+      <h2>First look.<br><em>Fresh drops.</em></h2>
+      <form id="newsletter"><input type="email" placeholder="Your email address" required><button class="primary">Join
+          ↗</button></form><small>No spam. Just new drops and useful updates.</small>
+    </section>
+  </main>
+
+  <footer>
+    <div class="logo">ALGO<span>FIT</span></div>
+    <p>Curated fashion for everyday movement.</p>
+    <p>© 2026 AlgoFit</p>
+  </footer>
+
+  <div class="modal" id="authModal">
+    <div class="modal-box"><button class="close" data-close>×</button>
+      <p class="eyebrow">YOUR ALGOFIT</p>
+      <h2 id="authTitle">Welcome back.</h2>
+      <form id="authForm"><input id="authEmail" type="email" placeholder="Email address" required><input
+          id="authPassword" type="password" placeholder="Password" minlength="6" required><button class="primary"
+          type="submit">Continue ↗</button></form><button class="text-btn" id="toggleAuth">Create an account</button>
+      <p class="form-note" id="authNote"></p>
+    </div>
+  </div>
+  <div class="drawer" id="bagDrawer">
+    <div class="drawer-head">
+      <h3>Your bag</h3><button class="close" data-bag-close>×</button>
+    </div>
+    <div id="bagItems"></div>
+    <div class="drawer-total"><span>Total</span><strong id="bagTotal">₹0</strong></div><button class="primary full"
+      id="checkoutBtn">Place order via Google Form ↗</button>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="/app.js"></script>
+</body>
+
+</html>
