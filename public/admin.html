@@ -737,21 +737,26 @@ async function loginAdmin(event) {
     console.warn('Supabase login failed, trying local admin fallback:', e);
   }
 
-  const fallback = await fetch('/api/admin/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password })
-  });
+  try {
+    const fallback = await fetch('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
 
-  const fallbackData = await fallback.json();
+    const fallbackData = await fallback.json();
 
-  if (!fallback.ok) {
-    errorBox.textContent = fallbackData.error || 'Invalid admin credentials.';
-    return;
+    if (!fallback.ok) {
+      errorBox.textContent = fallbackData.error || 'Invalid admin credentials.';
+      return;
+    }
+
+    session = { access_token: fallbackData.token };
+    await verifyAdmin();
+  } catch (error) {
+    console.error('Admin login request failed:', error);
+    errorBox.textContent = 'Admin login needs the AlgoFit server. Open http://localhost:3000/admin.';
   }
-
-  session = { access_token: fallbackData.token };
-  await verifyAdmin();
 }
 
 
@@ -761,25 +766,32 @@ async function loginAdmin(event) {
 
 async function init() {
 
-  const response = await fetch('/api/config');
+  try {
+    const response = await fetch('/api/config');
+    if (!response.ok) return;
 
-  const config = await response.json();
+    const config = await response.json();
 
-  supabaseClient = window.supabase.createClient(
-    config.supabaseUrl,
-    config.supabasePublishableKey
-  );
+    if (!config.supabaseUrl || !config.supabasePublishableKey) return;
 
-  const {
-    data
-  } = await supabaseClient.auth.getSession();
+    supabaseClient = window.supabase.createClient(
+      config.supabaseUrl,
+      config.supabasePublishableKey
+    );
 
-  if (data.session) {
+    const {
+      data
+    } = await supabaseClient.auth.getSession();
 
-    session = data.session;
+    if (data.session) {
 
-    await verifyAdmin();
+      session = data.session;
 
+      await verifyAdmin();
+
+    }
+  } catch (error) {
+    console.warn('Admin server config unavailable:', error);
   }
 
 }
