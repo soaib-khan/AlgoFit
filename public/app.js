@@ -1,4 +1,5 @@
-let products = []; let filter = 'All'; let bag = []; let isSignup = false; let supabase = null; let googleOrderFormUrl = '';
+const defaultGoogleOrderFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLScSSvCDr1FF_9HdJCKwUzUyOoDwjjudIGqejQf5Qf2QSKBVFg/viewform?usp=publish-editor';
+let products = []; let filter = 'All'; let bag = []; let isSignup = false; let supabase = null; let googleOrderFormUrl = defaultGoogleOrderFormUrl;
 const curatedProducts = [
   { id: 'demo1', name: 'Street Flex Hoodie', category: 'Hoodies', price: 299, image_url: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=85' },
   { id: 'demo2', name: 'Relaxed Indigo Jeans', category: 'Jeans', price: 199, image_url: 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=900&q=85' },
@@ -10,7 +11,7 @@ const curatedProducts = [
 const $ = s => document.querySelector(s); const $$ = s => document.querySelectorAll(s);
 const money = n => `₹${Number(n).toLocaleString('en-IN')}`;
 async function init() {
-  try { const r = await fetch('/api/config'); const c = await r.json(); googleOrderFormUrl = c.googleOrderFormUrl || ''; if (c.supabaseUrl && c.supabasePublishableKey) { const mod = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'); supabase = mod.createClient(c.supabaseUrl, c.supabasePublishableKey) } } catch (e) { console.warn('Supabase unavailable', e) }
+  try { const r = await fetch('/api/config'); const c = await r.json(); googleOrderFormUrl = c.googleOrderFormUrl || defaultGoogleOrderFormUrl; if (c.supabaseUrl && c.supabasePublishableKey) { const mod = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'); supabase = mod.createClient(c.supabaseUrl, c.supabasePublishableKey) } } catch (e) { console.warn('Supabase unavailable', e) }
   await loadProducts(); setup(); observe();
 }
 async function loadProducts() {
